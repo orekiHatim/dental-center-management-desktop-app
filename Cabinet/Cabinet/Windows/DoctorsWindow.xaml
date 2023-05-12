@@ -1,0 +1,201 @@
+﻿<Window x:Class="Cabinet.Windows.DoctorsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Cabinet.Windows"
+        mc:Ignorable="d"
+        Title="DoctorsWindow" Height="900" Width="1300"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <materialDesign:Card Background="{DynamicResource MaterialDesignPaper}" UniformCornerRadius="15" Margin="25" materialDesign:ShadowAssist.ShadowDepth="Depth4">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:ColorZone Grid.Column="0" Height="850" CornerRadius="15 0 0 15" Background="White">
+
+                <StackPanel Margin="15">
+
+                    <WrapPanel Margin="0 10 5 60" HorizontalAlignment="Center">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Height="120" Width="120"></Image>
+                    </WrapPanel>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            materialDesign:ButtonAssist.CornerRadius="6" Width="auto" Height="35" materialDesign:RippleAssist.Feedback="white"
+                            Margin="0 0 0 15">
+
+                        <WrapPanel Width="180">
+                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" Margin="0 0 20 0"></materialDesign:PackIcon>
+                            <TextBlock>Dashboard</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            materialDesign:ButtonAssist.CornerRadius="6" Width="auto" Height="35" materialDesign:RippleAssist.Feedback="white"
+                            Margin="0 0 0 15" x:Name="patientsBtn" Click="patientsBtn_Click" >
+
+                        <WrapPanel Width="180">
+                            <materialDesign:PackIcon Kind="Patient" VerticalAlignment="Center" Margin="0 0 20 0"></materialDesign:PackIcon>
+                            <TextBlock>Patients</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            materialDesign:ButtonAssist.CornerRadius="6" Width="auto" Height="35" materialDesign:RippleAssist.Feedback="white"
+                            Margin="0 0 0 15" Background="{StaticResource MaterialDesignFlatButtonClick}">
+
+                        <WrapPanel Width="180">
+                            <materialDesign:PackIcon Kind="Doctor" VerticalAlignment="Center" Margin="0 0 20 0"></materialDesign:PackIcon>
+                            <TextBlock>Doctors</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            materialDesign:ButtonAssist.CornerRadius="6" Width="auto" Height="35" materialDesign:RippleAssist.Feedback="white"
+                            Margin="0 0 0 15" x:Name="appointmentsWindow" Click="appointmentsWindow_Click">
+
+                        <WrapPanel Width="180">
+                            <materialDesign:PackIcon Kind="Clock" VerticalAlignment="Center" Margin="0 0 20 0"></materialDesign:PackIcon>
+                            <TextBlock>Appointments</TextBlock>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            materialDesign:ButtonAssist.CornerRadius="6" Width="auto" Height="35" materialDesign:RippleAssist.Feedback="white"
+                            Margin="0 0 0 15" x:Name="logoutBtn">
+
+                        <WrapPanel Width="180">
+                            <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Margin="0 0 20 0"></materialDesign:PackIcon>
+                            <TextBlock>Logout</TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </StackPanel>
+
+            </materialDesign:ColorZone>
+
+            <StackPanel Grid.Column="1" Margin="15 0 10 0">
+                <DockPanel Margin="0 20 0 10">
+                    <TextBlock Text="Manage Your Doctors" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="searchBox" Width="150" Height="50" Background="White" HorizontalAlignment="Right" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}"
+                            materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextChanged="searchBox_TextChanged" ></TextBox>
+                </DockPanel>
+
+                <materialDesign:Card Background="White" UniformCornerRadius="5" Padding="5" 
+                                    >
+
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Text="List of Doctors" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center"></TextBlock>
+                            
+                            
+                            <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}" DockPanel.Dock="Right">
+                                <materialDesign:DialogHost.DialogContent>
+                                    <Grid Width="300" Height="150" HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Margin="15">
+                                            <materialDesign:PackIcon Kind="Delete" Foreground="{StaticResource PrimaryHueMidBrush}" Width="50" Height="50"></materialDesign:PackIcon>
+                                            <TextBlock Foreground="Gray" Width="200" Margin="15 5" TextWrapping="Wrap">
+                                    Do you want to delete this patient?
+                                            </TextBlock>
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
+                                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4"
+                                        VerticalAlignment="Center">
+                                                Cancel
+                                            </Button>
+                                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4"
+                                        VerticalAlignment="Center" x:Name="confirmDeleteBtn" Click="confirmDeleteBtn_Click" >
+                                                Delete
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:DialogHost.DialogContent>
+
+                                <Button Width="100" Background="Crimson" Foreground="white" BorderThickness="0" IsEnabled="false" x:Name="deleteBtn"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">Delete</Button>
+
+                            </materialDesign:DialogHost>
+                            
+                            
+                            <Button Width="100" Background="LightGray" Foreground="White" BorderThickness="0" DockPanel.Dock="Right" Margin="0 0 20 0" x:Name="addBtn" Click="addBtn_Click">Add</Button>
+                            <Button Width="100" Background="LimeGreen" Foreground="White" BorderThickness="0" DockPanel.Dock="Right" Margin="0 0 20 0" x:Name="updateBtn" Click="updateBtn_Click" IsEnabled="False" >Update</Button>
+                            <TextBlock></TextBlock>
+                        </DockPanel>
+
+                        <DataGrid Style="{StaticResource MaterialDesignDataGrid}" ColumnHeaderStyle="{DynamicResource MaterialDesignDataGridColumnHeader}"
+                                      x:Name="doctorsDataGrid" CanUserReorderColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      Background="Transparent" Foreground="gray" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="doctorsDataGrid_SelectionChanged" >
+
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
+                                    <DataGridCheckBoxColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Style="{DynamicResource MaterialDesignAccentCheckBox}"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridCheckBoxColumn.HeaderTemplate>
+                                </DataGridCheckBoxColumn>
+
+
+
+                                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" CanUserResize="False" Width="*"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="First Name" Binding="{Binding Fname}" IsReadOnly="True" CanUserResize="False" Width="*"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding Lname}" IsReadOnly="True" CanUserResize="False" Width="*"></DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" IsReadOnly="True" CanUserResize="False" Width="*"></DataGridTextColumn>
+
+
+
+
+
+                            </DataGrid.Columns>
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow" BasedOn="{StaticResource MaterialDesignDataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource MaterialDesignDataGridRowHoverBackground}"></Setter>
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource MaterialDesignBodyLight}"></Setter>
+                                            <Setter Property="BorderThickness" Value="0"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+
+
+
+
+                        </DataGrid>
+
+                    </StackPanel>
+
+
+
+                </materialDesign:Card>
+
+            </StackPanel>
+
+
+        </Grid>
+    </materialDesign:Card>
+</Window>
